@@ -1,36 +1,38 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { gjejUdhetimin } from "@/lib/udhetimet";
+import { KartaUdhetimi } from "@/components/KartaUdhetimi";
+import { lexoUdhetimet, type Udhetim } from "@/lib/udhetimet";
 
-export default async function Detajet({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const udhetim = gjejUdhetimin(id);
+export const dynamic = "force-dynamic";
 
-  if (!udhetim) {
-    notFound();
+export default async function Home() {
+  let udhetimet: Udhetim[];
+
+  try {
+    udhetimet = await lexoUdhetimet();
+  } catch {
+    return (
+      <main>
+        <h1>RideShare</h1>
+        <p role="alert">Nuk u lidhëm me databazën. Provo përsëri.</p>
+        <Link className="action" href="/">
+          Provo përsëri
+        </Link>
+      </main>
+    );
   }
 
   return (
     <main>
-      <Link href="/">← Kthehu te lista</Link>
-      <h1>
-        {udhetim.nisja} – {udhetim.destinacioni}
-      </h1>
-      <p>Ora: {udhetim.ora}</p>
-      <p>Vendtakimi: {udhetim.vendtakimi}</p>
-      <p>Vende të lira: {udhetim.vende}</p>
-      {udhetim.vende > 0 ? (
-        <Link className="action" href={`/udhetimi/${id}/kerkesa`}>
-          Kërko vend
-        </Link>
+      <h1>RideShare · Udhëtimet për AAB</h1>
+      <p>Burimi: Neon · të dhëna fiktive për ushtrime</p>
+      {udhetimet.length === 0 ? (
+        <p>Nuk ka udhëtime për momentin.</p>
       ) : (
-        <button className="action" disabled>
-          Nuk ka vende të lira
-        </button>
+        <div className="trip-list">
+          {udhetimet.map((udhetim) => (
+            <KartaUdhetimi key={udhetim.id} udhetim={udhetim} />
+          ))}
+        </div>
       )}
     </main>
   );

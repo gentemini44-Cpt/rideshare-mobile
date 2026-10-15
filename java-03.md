@@ -1,21 +1,23 @@
 # RideShare — Java 3
 
+Ruaje këtë skedar si `java-03.md` pranë README në repository-n tënd, jashtë dosjes `aplikacioni/`. Mos shto `.txt` pas emrit. Zëvendëso të gjitha shenjat e plotësimit me atë që ndodhi vërtet. Mjafton një fjali e qartë për çdo provë, por trego çfarë prite dhe çfarë pe.
+
 ## Çfarë ndërtova
-Sot përfundova faqen kryesore me listën e udhëtimeve fiktive përmes komponentit të kartave, faqen dinamike të detajeve të udhëtimit me vendtakimin përkatës, si dhe simulimin e kërkesës për vend në aplikacionin RideShare duke përdorur Next.js dhe TypeScript.
+Gjate kesaj jave punova ne pamjen e RideShare dhe ne pregaditjen e faqeve per udhtime.Shtova stilet per kartat, butonat dhe pamjen e pergjithshme te apliakcionit
 
 ## Provat që bëra
 ### Prova 1: Lista në telefon
-Hapa faqen kryesore në pamjen e telefonit përmes mjeteve të zhvilluesit në shfletues; prisja tri karta pa lëvizje anash; pashë se tri kartat u renditën saktë dhe dizajni u përshtat pa shkaktuar rrëshqitje horizontale (horizontal scroll).
+E hapa faqen kryesore ne pamjen  e telefonit per te kontrolluar si parqiten kartat. Kontrollova  nese  permbajtjten shihet qarte dhe nese faqja mund te perdoret pa levizje anash.
 
 ### Prova 2: Detajet e udhëtimit të dytë
-Klikova kartën 2; prisja adresën /udhetimi/2 dhe vendtakimin e saj; pashë se adresa ndryshoi saktësisht dhe u shfaq vendtakimi i detajuar. 
-Shënova edhe çfarë ndodhi te karta 3 (zero vende) dhe te /udhetimi/99: Karta e tretë u shfaq me statusin e çaktivizuar për shkak të mungesës së vendeve të lira, kurse te adresa /udhetimi/99 u shfaq saktësisht faqja përkatëse që njoftonte se udhëtimi nuk u gjet.
+Kontrollova kartën e dyte dhe faqen e detajeve per te pare nese shfaqen informatat e udhetimit dhe vendtakimi.
+Te karta e trete kontrollova paraqitjen e udhetimit pa vende te lira. Gjithashtu kontrollova adresen /udhetimi/99 per te pare si paraqitet nje udhetim qe nuk ekziston
 
 ### Prova 3: Kërkesa në pritje
-Klikova Kërko vend; prisja “Simulim: Në pritje”, pa rezervim real; pashë se mesazhi u shfaq menjëherë nën buton në mënyrë interaktive. Pastaj u ktheva te detajet dhe lista: Navigimi mbrapa funksionoi në mënyrë të rregullt pa ruajtur ndonjë rezervim të vërtetë në backend.
+Kontrollova funksionin e kerkeses per vend dhe paraqitjen e mesazhit "Simulim: Ne pritje". Kerkesa eshte vetem demonstrim dhe nuk kryhet rezervim real. Pastaj kontrollova kthimin te faqja e detajeve dhe lista.
 
 ## Çfarë do të përmirësoj
-Për javën e ardhshme do të përmirësoj menaxhimin e gjendjes (state) që kërkesat e dërguara të ruhen përkohësisht gjatë sesionit të përdoruesit.
+Ne e javen tjeter dua te permiresoj pamjen e aplikacionit ne telefon dhe te kontrolloj me mire funksionimin e butonave dhe kalimin ndermjet faqeve.
 
 ## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
-AI më ndihmoi në strukturimin e komponentëve të Next.js, rregullimin e gabimeve të TypeScript dhe konfigurimin e rrugëve dinamike për detajet, ndërsa unë vetë bëra testimin e faqeve dhe provat në shfletues.
+Perdora AI per te kuptuar disa pjese te kodit dhe per te rregulluar stilet e aplikacionit. Kodin e vendosa ne projekt dhe kontrollova hapat gjate punes.

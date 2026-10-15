@@ -2,53 +2,61 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import type { Udhetim } from "@/lib/udhetimet";
 
-const { lexoUdhetimetMock } = vi.hoisted(() => ({
-  lexoUdhetimetMock: vi.fn(),
+const { gjejUdhetiminMock } = vi.hoisted(() => ({
+  gjejUdhetiminMock: vi.fn(),
 }));
 
 vi.mock("@/lib/udhetimet", () => ({
-  lexoUdhetimet: lexoUdhetimetMock,
+  gjejUdhetimin: gjejUdhetiminMock,
+}));
+vi.mock("next/navigation", () => ({
+  notFound: () => {
+    throw new Error("NEXT_NOT_FOUND");
+  },
 }));
 
-import Home from "./page";
+import Detajet from "./page";
 
 const udhetimi: Udhetim = {
-  id: "1",
-  nisja: "Prishtinë",
+  id: "2",
+  nisja: "Fushë Kosovë",
   destinacioni: "AAB",
-  ora: "08:00",
-  vendtakimi: "Stacioni i autobusëve",
-  vende: 2,
+  ora: "08:15",
+  vendtakimi: "Te stacioni kryesor",
+  vende: 1,
 };
 
-describe("Home", () => {
+describe("Detajet", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  test("paraqet udhëtimet e lexuara nga databaza", async () => {
-    lexoUdhetimetMock.mockResolvedValue([udhetimi]);
+  test("pret dhe paraqet udhëtimin e gjetur", async () => {
+    gjejUdhetiminMock.mockResolvedValue(udhetimi);
 
-    const html = renderToStaticMarkup(await Home());
+    const html = renderToStaticMarkup(
+      await Detajet({ params: Promise.resolve({ id: "2" }) }),
+    );
 
-    expect(html).toContain("Prishtinë – AAB");
-    expect(html).toContain("Burimi: Neon");
-  });
-
-  test("paraqet mesazhin e listës bosh", async () => {
-    lexoUdhetimetMock.mockResolvedValue([]);
-
-    const html = renderToStaticMarkup(await Home());
-
-    expect(html).toContain("Nuk ka udhëtime për momentin.");
+    expect(html).toContain("Fushë Kosovë – AAB");
+    expect(html).toContain("Ora: 08:15");
   });
 
   test("paraqet gabim të sigurt kur databaza nuk arrihet", async () => {
-    lexoUdhetimetMock.mockRejectedValue(new Error("connection failed"));
+    gjejUdhetiminMock.mockRejectedValue(new Error("connection failed"));
 
-    const html = renderToStaticMarkup(await Home());
+    const html = renderToStaticMarkup(
+      await Detajet({ params: Promise.resolve({ id: "2" }) }),
+    );
 
     expect(html).toContain("Nuk u lidhëm me databazën. Provo përsëri.");
-    expect(html).toContain('role="alert"');
+  });
+
+  test("përdor faqen not-found kur udhëtimi mungon", async () => {
+    gjejUdhetiminMock.mockResolvedValue(undefined);
+
+    await expect(
+      Detajet({ params: Promise.resolve({ id: "99" }) }),
+    ).rejects.toThrow("NEXT_NOT_FOUND");
   });
 });

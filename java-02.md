@@ -3,33 +3,32 @@
 **Shkurtesat:** MVP (Minimum Viable Product – produkti minimal i përdorshëm); AI (Artificial Intelligence – inteligjencë artificiale).
 
 ## 1. Problemi
-[Veshtiresi per orarin e autobusav te aab dhe rrugen qe e marrin ata ] Çfarë vështirësie kanë studentët që udhëtojnë për në AAB?
+Studentët që udhëtojnë për në AAB shpesh kanë vështirësi të gjejnë transport të përshtatshëm, sidomos kur kanë orare të ndryshme dhe duan të ndajnë shpenzimet e udhëtimit.
 
 ## 2. Përdoruesit
-[Shoferi deshiron te shes vende te lira dhe te ndihmoj,Udhetari deshiron te kete me te leht udhetimin] Çfarë dëshiron shoferi? Çfarë dëshiron udhëtari?
+Shoferi: Dëshiron të publikojë një udhëtim, të tregojë orën, vendin e nisjes dhe numrin e vendeve të lira.
+Udhëtari: Dëshiron të gjejë një udhëtim të përshtatshëm dhe të kërkojë një vend.
 
 ## 3. Tri ekranet
-1. Lista e udhëtimeve: [Shfaq te gjitha udhtimet e disponueshme]
-2. Detajet e udhëtimit: [Tregon te dhenat shoferi,udhetimit,orarin,veturen,destinacionin,pika nisjes,cmimi]
-3. Kërkesa në pritje: [Lista e kerkesave qe studentet kan bere per nje vend shoferi mund te pranoj ose refuzoj]
+Lista e udhëtimeve: Shfaq udhëtimet e disponueshme me nisjen, destinacionin, orën dhe vendet e lira.
+Detajet e udhëtimit: Shfaq informacionin e plotë dhe një buton për të kërkuar një vend.
+Kërkesa në pritje: Shfaq kërkesën e udhëtarit dhe statusin e saj, p.sh. në pritje, pranuar ose refuzuar.
 
 ## 4. MVP — vetëm tri veçori
-[1.Shfaqja e listes se udhetimeve te disponueshme
- 2.Rezervimi i nje vendi ne nje udhtim
- 3.Shfaqja e keresave ne pritje per shoferin
- ] Cilat tri veprime duhet të funksionojnë në versionin e parë?
+Shoferi mund të publikojë një udhëtim.
+Udhëtari mund të shohë dhe të zgjedhë një udhëtim.
+Udhëtari mund të kërkojë një vend në udhëtim.
 
 ## 5. Çfarë e lëmë për më vonë?
-[Rating,Notifications,-] Shëno dy gjëra që nuk na duhen ende.
+Pagesat online.
+Sistemi i vlerësimeve dhe komenteve.
 
 ## 6. Si e provoj?
-[Duhet te shfaqet mesazhi "Kerkesa u dergua me sukses" ] Çfarë duhet të ndodhë kur kërkoj një vend?
-[Mesazhi "Nuk ka vende te lira per kete udhetim"] Çfarë ndodh nëse nuk ka vende të lira?
+Kur kërkoj një vend: Kërkesa regjistrohet dhe shfaqet si “Në pritje” te kërkesat e udhëtarit.
+Nëse nuk ka vende të lira: Shfaqet një mesazh që tregon se udhëtimi është i plotë dhe përdoruesi nuk mund të dërgojë kërkesë.
 
 ## 7. Prova me kolegun
-[PLOTËSO] Ku u hutua kolegu dhe çfarë ndryshova në skicë?
+Kolegu u hutua te butoni për të kërkuar një vend, sepse nuk ishte mjaftueshëm i dukshëm. Në skicë e bëra butonin më të qartë dhe vendosa një përshkrim të shkurtër pranë tij.
 
 ## 8. Ndihma nga AI
-[Per Pyetjen e 5 dhe 2 por morra vetem iden] Shëno çfarë ndihme more dhe çfarë kontrollove vetë, ose shkruaj: Nuk përdora AI.
-
-Hiqi shenjat e plotësimit pasi t'i zëvendësosh me përgjigjet e tua.
+Përdora AI për të marrë ide për strukturën e aplikacionit dhe për veçoritë kryesore të MVP-së. Vetë kontrollova nëse këto ide përshtateshin me problemin dhe me funksionimin e aplikacionit.

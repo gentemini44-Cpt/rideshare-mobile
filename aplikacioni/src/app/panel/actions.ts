@@ -14,5 +14,6 @@ export async function ruajOren(formData: FormData) {
     revalidatePath("/");
     revalidatePath("/udhetimi/2");
   }
+  // redirect qëndron jashtë try/catch: Next.js e përdor si kontroll rrjedhe.
   redirect("/panel?m=" + mesazh);
 }

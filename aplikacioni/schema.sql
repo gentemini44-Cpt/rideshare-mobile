@@ -1,3 +1,4 @@
+-- Skedari: schema.sql (brenda aplikacionit, pranë package.json)
 -- Të dhëna fiktive për laboratorin; ekzekutohet në Neon SQL Editor.
 CREATE TABLE IF NOT EXISTS udhetimet (
   id TEXT PRIMARY KEY,

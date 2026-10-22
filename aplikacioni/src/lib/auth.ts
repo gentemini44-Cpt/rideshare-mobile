@@ -2,6 +2,7 @@ import "server-only";
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
+// GitHub verifikon identitetin. Rolin e lexojmë veçmas nga Neon.
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [GitHubProvider({

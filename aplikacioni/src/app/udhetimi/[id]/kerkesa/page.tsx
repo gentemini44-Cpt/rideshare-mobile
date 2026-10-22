@@ -6,12 +6,9 @@ export const dynamic = "force-dynamic";
 
 export default async function Kerkesa({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+}: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   let udhetim;
-
   try {
     udhetim = await gjejUdhetimin(id);
   } catch {
@@ -23,10 +20,7 @@ export default async function Kerkesa({
       </main>
     );
   }
-
-  if (!udhetim) {
-    notFound();
-  }
+  if (!udhetim) notFound();
 
   return (
     <main>
@@ -37,9 +31,7 @@ export default async function Kerkesa({
           <p>Kërkesa për {udhetim.nisja} nuk është dërguar te shoferi.</p>
           <p>Ruajtjen dhe konfirmimin real do t’i shtojmë më vonë.</p>
         </>
-      ) : (
-        <h1>Nuk ka vende të lira.</h1>
-      )}
+      ) : <h1>Nuk ka vende të lira.</h1>}
     </main>
   );
 }

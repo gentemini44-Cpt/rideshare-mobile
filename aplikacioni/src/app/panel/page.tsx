@@ -12,7 +12,9 @@ const mesazhet: Record<string, string> = {
   databaza: "Nuk u lidhëm me databazën. Kontrollo Neon dhe provo përsëri.",
 };
 
-export default async function Panel({ searchParams }: { searchParams: Promise<{ m?: string }> }) {
+export default async function Panel({ searchParams }: {
+  searchParams: Promise<{ m?: string }>;
+}) {
   const { m } = await searchParams;
   let p;
   try { p = await profiliIm(); }

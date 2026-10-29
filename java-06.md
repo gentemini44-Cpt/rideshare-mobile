@@ -41,7 +41,7 @@ Riktheva rrjetin dhe klikova "Rifresko listën": ID 2 tregoi 08:25, burimi
 Pastaj riktheva në Neon 08:15, rifreskova dhe lista tregoi sërish 08:15.
 
 ## Ku gjendet puna
-Repository: https://github.com/arberpreniqi-aab/rideshare-mobile
+Repository: https://github.com/gentemini44-Cpt/rideshare-mobile
 
 Skedarët e shtuar ose të ndryshuar brenda `aplikacioni/`:
 - `src/app/manifest.ts`

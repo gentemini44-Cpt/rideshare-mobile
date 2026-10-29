@@ -6,7 +6,9 @@ export const dynamic = "force-dynamic";
 
 export default async function Detajet({
   params,
-}: { params: Promise<{ id: string }> }) {
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   let udhetim;
   try {
@@ -20,20 +22,38 @@ export default async function Detajet({
       </main>
     );
   }
-  if (!udhetim) notFound();
+
+  if (!udhetim) {
+    notFound();
+  }
 
   return (
     <main>
       <Link href="/">← Kthehu te lista</Link>
-      <h1>{udhetim.nisja} – {udhetim.destinacioni}</h1>
-      <p>Ora: {udhetim.ora}</p>
-      <p>Vendtakimi: {udhetim.vendtakimi}</p>
-      <p>Vende të lira: {udhetim.vende}</p>
+      <p className="eyebrow">Detajet e udhëtimit</p>
+      <h1>
+        {udhetim.nisja} – {udhetim.destinacioni}
+      </h1>
+      <div className="details">
+        <p>
+          <strong>Ora:</strong> {udhetim.ora}
+        </p>
+        <p>
+          <strong>Vendtakimi:</strong> {udhetim.vendtakimi}
+        </p>
+        <p>
+          <strong>Vende të lira:</strong> {udhetim.vende}
+        </p>
+      </div>
       {udhetim.vende > 0 ? (
         <Link className="action" href={`/udhetimi/${id}/kerkesa`}>
           Kërko vend
         </Link>
-      ) : <button className="action" disabled>Nuk ka vende të lira</button>}
+      ) : (
+        <button className="action" disabled>
+          Nuk ka vende të lira
+        </button>
+      )}
     </main>
   );
 }

@@ -4,7 +4,7 @@ Ruaje këtë raport pranë README në rrënjën e repository-t.
 
 ## Rasti im
 GitHub: gentemini44-Cpt
-Kodi: P7-704
+Kodi: P7-186
 Skenari i zgjedhur (numri dhe titulli, nga Rastet 1–5): 1 — Lista dhe detajet
 ID i udhëtimit në projektin tim: 2
 Të dhënat fiktive të rastit: ID 2 për rrjedhën normale; ID 3 për provën me 0 vende; ID 999999 për ID që mungon.

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { gjejUdhetimin } from "@/lib/udhetimet";
+import ZgjedhVendtakimin from "@/components/ZgjedhVendtakimin";
 
 export const dynamic = "force-dynamic";
 
@@ -36,15 +37,19 @@ export default async function Detajet({
       </h1>
       <div className="details">
         <p>
+          <strong>Pika e nisjes:</strong> {udhetim.nisja}
+        </p>
+        <p>
           <strong>Ora:</strong> {udhetim.ora}
         </p>
         <p>
-          <strong>Vendtakimi:</strong> {udhetim.vendtakimi}
+          <strong>Vendtakimi i shoferit:</strong> {udhetim.vendtakimi}
         </p>
         <p>
           <strong>Vende të lira:</strong> {udhetim.vende}
         </p>
       </div>
+      <ZgjedhVendtakimin />
       {udhetim.vende > 0 ? (
         <Link className="action" href={`/udhetimi/${id}/kerkesa`}>
           Kërko vend

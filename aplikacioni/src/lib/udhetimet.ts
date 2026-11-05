@@ -6,8 +6,10 @@ export type Udhetim = {
   nisja: string;
   destinacioni: string;
   ora: string;
+  ora_e_meparshme?: string;
   vendtakimi: string;
   vende: number;
+  shoferi?: string;
 };
 
 export async function lexoUdhetimet(): Promise<Udhetim[]> {

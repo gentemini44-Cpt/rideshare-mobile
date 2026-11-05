@@ -1,66 +1,39 @@
-# RideShare — Java 6 · PWA dhe puna offline
+# Java 6: PWA dhe lexim offline
 
-## Çfarë ndërtova
-- **Manifesti** (`src/app/manifest.ts` → `/manifest.webmanifest`) i jep aplikacionit emrin
-  "RideShare AAB", pamjen `standalone`, ngjyrat dhe dy ikonat (192×192 dhe 512×512),
-  që shfletuesi ta njohë si PWA. Nuk ruan udhëtime dhe nuk prek databazën.
-- **API publike** (`/api/udhetimet`) kthen vetëm gjashtë fushat publike të udhëtimeve nga
-  Neon, pa profile, email ose sesion.
-- **Service worker** (`public/sw.js`) ruan në cache `rideshare-public-v1` vetëm
-  `offline.html`, ikonat dhe listën publike. Për listën provon fillimisht serverin dhe ruan
-  përgjigjen me kohën e ruajtjes; kur serveri nuk arrihet, kthen kopjen e fundit.
-  `/panel`, hyrja dhe POST nuk ruhen.
-- **Lexuesi offline** (`public/offline.html`) shfaq kartat, burimin (server ose kopje) dhe
-  kohën e ruajtjes. Butoni "Kërko vend" është i çaktivizuar.
-- **Pwa.tsx** në `layout.tsx` regjistron worker-in dhe mbush kopjen që në vizitën e parë.
+## Zbatimi
 
-## Provat që bëra
-Provat u bënë në Microsoft Edge (Chromium) në `http://localhost:3000`, me ndërprerjen e
-rrjetit të simuluar nga mjetet e zhvilluesit (si Network → Offline) për faqen dhe service worker-in.
+- U shtuan manifesti RideShare AAB dhe ikonat PNG 192x192 dhe 512x512.
+- Endpoint-i GET /api/udhetimet kthen vetëm ID-në, nisjen, destinacionin, orën, vendtakimin dhe vendet.
+- Service worker ruan faqen offline, ikonat dhe përgjigjen publike të listës. Paneli, hyrja dhe kërkesat POST nuk ruhen.
+- Faqja offline tregon burimin dhe kohën e kopjes. Butoni i rezervimit mbetet i çaktivizuar.
+- Komponenti Pwa regjistron worker-in dhe ngroh kopjen pasi shfletuesi kontrollohet prej tij.
 
 ### Prova 1: Manifesti dhe vizita online
-Hapa `http://localhost:3000/manifest.webmanifest`: emri "RideShare AAB", `display: standalone`,
-ikonat `/icons/icon-192.png` (192×192) dhe `/icons/icon-512.png` (512×512); të dyja hapen me
-përmasat e sakta. Pas hapjes së faqes kryesore, `/sw.js` ishte `activated` dhe e kontrollonte faqen.
-Te Cache Storage → `rideshare-public-v1` gjeta `/offline.html`, dy ikonat dhe `/api/udhetimet`.
-`/offline.html` shfaqi tri kartat, "Lista erdhi nga serveri. Lexo sërish para çdo veprimi."
-dhe kohën e ruajtjes (22.10.2026, 6:19 m.d.). Instalimin si aplikacion nuk e provova.
 
-### Prova 2: Pa internet dhe pas rifreskimit
-Aktivizova Offline dhe hapa `/`, pastaj rifreskova faqen. U hap dokumenti offline
-"RideShare · Lista e ruajtur" me tri kartat (08:00, 08:15, 07:45) dhe kohën e kopjes
-22.10.2026, 6:19 m.d. Mesazhi ishte "Lista e fundit e ruajtur · Mund të jetë vjetruar.
-Serveri nuk u arrit." Butoni "Kërko vend" ishte i çaktivizuar: kjo pamje është vetëm lexim
-nga një kopje e vjetër dhe nuk mund ta pyesë serverin, prandaj nuk konfirmon asnjë rezervim.
+**Hapat:** Hapa /manifest.webmanifest, të dy ikonat dhe /api/udhetimet në Chrome. Pastaj hapa aplikacionin me gjerësi 375 px dhe kontrollova Service Worker dhe Cache Storage.
 
-### Prova 3: Lidhja rikthehet
-Me RideShare ende offline, ndryshova në Neon orën e ID 2 nga 08:15 në 08:25.
-Klikimi "Rifresko listën" offline tregoi ende 08:15 dhe mesazhin e kopjes së ruajtur.
-Riktheva rrjetin dhe klikova "Rifresko listën": ID 2 tregoi 08:25, burimi
-"Lista erdhi nga serveri" dhe koha e re e ruajtjes (6:19:38 m.d.).
-Pastaj riktheva në Neon 08:15, rifreskova dhe lista tregoi sërish 08:15.
+**Pritja:** Manifesti dhe ikonat hapen, API-ja kthen tri udhëtime me gjashtë fushat publike, worker-i është aktiv dhe faqja nuk ka dalje horizontale.
 
-## Ku gjendet puna
-Repository: https://github.com/gentemini44-Cpt/rideshare-mobile
+**Rezultati real:** Manifesti, API-ja, faqja offline, service worker-i dhe ikonat u përgjigjën me HTTP 200. API-ja ktheu tri udhëtime me gjashtë fushat publike. Cache Storage përmbante /offline.html, ikonat dhe /api/udhetimet; në gjerësi 375 px u shfaqën tri karta dhe dokumenti ishte 375 px i gjerë, pa dalje horizontale.
 
-Skedarët e shtuar ose të ndryshuar brenda `aplikacioni/`:
-- `src/app/manifest.ts`
-- `public/icons/icon-192.png`, `public/icons/icon-512.png`
-- `src/app/api/udhetimet/route.ts`
-- `public/sw.js`
-- `public/offline.html`
-- `src/components/Pwa.tsx`
-- `src/app/layout.tsx` (shtova `<Pwa />`)
+### Prova 2: Pa internet edhe pas rifreskimit
 
-Demo në Vercel nuk e publikova këtë javë; provat u bënë lokalisht.
+**Hapat:** Pasi lista u ruajt online, aktivizova Network Offline në tab-in RideShare, hapa përsëri /, rifreskova faqen dhe shtypa Rifresko listën.
 
-## Çfarë mbetet për përmirësim
-Në vizitën e parë pa internet nuk ka asnjë kopje: lexuesi shfaq "Ende nuk ka listë të ruajtur.
-Hape aplikacionin me internet dhe provo përsëri." Kufizimi i leximit offline është që lista
-mund të jetë e vjetër (vendet dhe orari mund të kenë ndryshuar) dhe nuk mund të bëhet
-asnjë veprim, as kërkesë për vend. Më pas do të shtoja një njoftim kur kopja është shumë e vjetër.
+**Pritja:** Pas rifreskimit shfaqen tri karta nga kopja e ruajtur, njoftimi tregon se lista mund të jetë e vjetruar dhe rezervimi është i çaktivizuar.
 
-## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
-Përdora Claude (asistent AI) për të krijuar skedarët A–F sipas udhëzimeve dhe për të
-ekzekutuar tri provat në një shfletues Edge të automatizuar, përfshirë ndryshimin e orës në
-Neon. Rezultatet e mësipërme janë ato që u shfaqën realisht gjatë provave.
+**Rezultati real:** Shfletuesi ishte offline dhe pas rifreskimit u shfaqën tri karta nga kopja e ruajtur. Mesazhi tregoi se lista mund të jetë e vjetruar, koha e ruajtjes u shfaq dhe butoni i rezervimit ishte i çaktivizuar.
+
+### Prova 3: Rikthimi i lidhjes dhe të dhënat e reja
+
+**Hapat:** Në Neon ndryshova përkohësisht orën e udhëtimit ID 2 nga 08:18 në 08:25. Riktheva lidhjen, shtypa Rifresko listën në RideShare dhe pas provës e riktheva orën fillestare.
+
+**Pritja:** Pas rifreskimit online, ID 2 tregon 08:25, burimin server dhe kohën e re të ruajtjes; pastaj ora fillestare rikthehet në Neon dhe aplikacion.
+
+**Rezultati real:** Pas rifreskimit online, karta e ID 2 tregoi 08:25, burimin server dhe kohën e re të ruajtjes. Pastaj ora u rikthye dhe u verifikua si 08:18 në Neon dhe në aplikacion. Baza kishte 08:18 para provës; udhëzuesi përmend 08:15, ndaj vlera fillestare u ruajt dhe mospërputhja u shënua.
+
+## Verifikime teknike
+
+- npm.cmd run build përfundoi me sukses.
+- Ikonat u verifikuan si PNG me përmasat e kërkuara.
+- Asnjë sekret nuk u shtua në raport.

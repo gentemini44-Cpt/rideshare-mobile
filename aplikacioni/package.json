@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
@@ -20,6 +21,9 @@
     "@types/node": "^22.15.30",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
-    "typescript": "^5.9.2"
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.5.29",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.7"
   }
 }

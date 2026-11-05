@@ -4,7 +4,7 @@ Ruaje këtë raport pranë README në rrënjën e repository-t.
 
 ## Rasti im
 GitHub: gentemini44-Cpt
-Kodi: P7-186
+Kodi: P7-730
 Skenari i zgjedhur (numri dhe titulli, nga Rastet 1–5): 1 — Lista dhe detajet
 ID i udhëtimit në projektin tim: 2
 Të dhënat fiktive të rastit: ID 2 për rrjedhën normale; ID 3 për provën me 0 vende; ID 999999 për ID që mungon.
@@ -22,8 +22,8 @@ Korrigjimi: U shtua lidhja “Rifresko listen” në gjendjen kur lista është 
 Arsyeja: Pa këtë veprim, përdoruesi nuk mund ta riprovonte ngarkimin nga ekrani bosh.
 
 ## Versionet
-Para: https://github.com/gentemini44-Cpt/rideshare-mobile/commit/2260166c891fa9121370747296308afcd69b6168
-Pas: https://github.com/gentemini44-Cpt/rideshare-mobile/commit/a79d658074145df9fb89a0a36df1f9beb8e1a4e0
+Repository aktual: https://github.com/gentemini44-Cpt/rideshare-mobile
+Commit-et para/pas të dokumentuara më parë nuk gjenden në historikun e këtij repository-je.
 
 ## Provat që bëra
 ### Prova 1

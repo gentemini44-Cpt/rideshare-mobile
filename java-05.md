@@ -1,25 +1,30 @@
-# Java 5 · RideShare
+# Java 5 - Hyrja me GitHub dhe ndryshimi me leje
 
-Plotësoje pas provave reale. Mos vendos sekrete ose vlera nga `.env.local` këtu.
+## Zbatimi
 
-### Prova 1 · Sesioni
+- [x] NextAuth 4.24.15 dhe rruga e hyrjes me GitHub jane shtuar ne kod.
+- [x] Skema ruhet te aplikacioni/schema-java05.sql dhe u ekzekutua ne Neon.
+- [x] Neon konfirmoi ID 1 ne 08:00 me pronarin demo, ID 2 ne 08:15 pa pronar dhe ID 3 ne 07:45.
+- [x] Paneli lexon identitetin dhe rolin nga sesioni dhe Neon; ruajtja kontrollon rolin dhe pronarin ne server.
+- [x] OAuth App u krijua; konfigurimi lokal ruhet ne aplikacioni/.env.local, i perjashtuar nga Git. Sekretet nuk vendosen ne kete raport.
+- [ ] Lidhja GitHub OAuth dhe caktimi i pronarit te ID 2 duhen konfiguruar per llogarine Gent Emini para se te perdoret paneli.
 
-**Hapat e provës:** Hapa `/panel`, klikova **Hyr me GitHub** dhe autorizova llogarinë; pastaj bëra dy kërkesa rifreskimi të sesionit dhe dërgova kërkesën lokale të daljes.
+## Provat
 
-**Rezultati real:** Hyrja shfaqi profilin me rolin **shofer**; sesioni testues mbeti aktiv pas rifreskimit dhe dalja pastroi cookie-n e sesionit. Dalja nuk u klikua në shfletues.
+Hyrja me GitHub dhe caktimi i pronarit nuk jane verifikuar per llogarine e pronarit te repository-t. Testet e ruajtjes per rastin e lejuar dhe te refuzuar jane ne pritje.
 
-### Prova 2 · Ndryshimi i lejuar (udhëtimi ID 2)
+### Prova 1 - Sesioni
 
-**Hapat e provës:** Në panel vendosa `08:25` te fusha e orës, klikova **Ruaj orën**, kontrollova Neon/listën/detajet e ID 2 dhe pastaj e riktheva orën në `08:15`.
+Hyrja me GitHub: duhet konfiguruar dhe testuar me llogarine e pronarit te repository-t.
 
-**Rezultati real:** Paneli shfaqi sukses; Neon, lista dhe detajet treguan `08:25`. Pas rikthimit, ID 2 ishte përsëri `08:15`.
+### Prova 2 - Ruajtja e lejuar
 
-### Prova 3 · Ndryshimi i refuzuar (udhëtimi ID 1)
+ID 2: pronari ne Neon duhet verifikuar; veprimi per ndryshimin e ores nuk u testua.
 
-**Hapat e provës:** Me sesion prove lokal të shoferit, dërgova formularin te Server Action me `id=1` në vend të `id=2` dhe kontrollova rreshtin për ID 1 në Neon.
+### Prova 3 - Refuzimi
 
-**Rezultati real:** Serveri e refuzoi kërkesën me mesazhin “Nuk ke leje”; ora e ID 1 mbeti `08:00`. Fusha nuk u ndryshua manualisht në DevTools.
+ID 1: refuzimi nepermjet formularit nuk u testua ende. Ora ne Neon mbeti 08:00; ID 2 mbeti 08:15 pas caktimit te pronarit.
 
-## Vështirësi ose gabime
+## Sekretet dhe ruajtja
 
-Dalja në shfletues dhe ndryshimi manual në DevTools nuk u kryen. Rifreskimi/dalja dhe Server Action për ID 1 u verifikuan me sesion lokal prove; ruajtja e ID 2 u provua në panel.
+Sekretet qendrojne ne aplikacioni/.env.local, i cili perjashtohet nga Git. Kontrollo qe skedari te mos shfaqet ne GitHub Desktop.

@@ -3,32 +3,45 @@
 **Shkurtesat:** MVP (Minimum Viable Product – produkti minimal i përdorshëm); AI (Artificial Intelligence – inteligjencë artificiale).
 
 ## 1. Problemi
-Studentët që udhëtojnë për në AAB shpesh kanë vështirësi të gjejnë transport të përshtatshëm, sidomos kur kanë orare të ndryshme dhe duan të ndajnë shpenzimet e udhëtimit.
+
+Studentët që udhëtojnë për në AAB e kanë të vështirë të gjejnë shpejt një makinë me vende të lira. Ata kanë nevojë të dinë nga niset makina, në cilën orë niset dhe sa vende janë të lira.
 
 ## 2. Përdoruesit
-Shoferi: Dëshiron të publikojë një udhëtim, të tregojë orën, vendin e nisjes dhe numrin e vendeve të lira.
-Udhëtari: Dëshiron të gjejë një udhëtim të përshtatshëm dhe të kërkojë një vend.
+
+Shoferi dëshiron të publikojë udhëtimin, vendin e nisjes, orën dhe numrin e vendeve të lira.
+
+Udhëtari, si Arta, dëshiron të gjejë një udhëtim për në AAB, të shohë detajet dhe të kërkojë një vend te shoferi.
 
 ## 3. Tri ekranet
-Lista e udhëtimeve: Shfaq udhëtimet e disponueshme me nisjen, destinacionin, orën dhe vendet e lira.
-Detajet e udhëtimit: Shfaq informacionin e plotë dhe një buton për të kërkuar një vend.
-Kërkesa në pritje: Shfaq kërkesën e udhëtarit dhe statusin e saj, p.sh. në pritje, pranuar ose refuzuar.
+
+1. **Lista e udhëtimeve:** shfaq vendin e nisjes, destinacionin, orën dhe numrin e vendeve të lira për çdo udhëtim.
+2. **Detajet e udhëtimit:** shfaqin nisjen, destinacionin, orën, vendtakimin dhe vendet e lira. Nga ky ekran Arta mund të kërkojë një vend.
+3. **Kërkesa në pritje:** shfaq statusin **“Në pritje”** dhe tregon se kërkesa duhet të pranohet nga shoferi para se të bëhet e konfirmuar.
 
 ## 4. MVP — vetëm tri veçori
-Shoferi mund të publikojë një udhëtim.
-Udhëtari mund të shohë dhe të zgjedhë një udhëtim.
-Udhëtari mund të kërkojë një vend në udhëtim.
+
+Tri veçoritë që duhet të funksionojnë së pari janë:
+
+1. Të shfaqet lista e udhëtimeve për në AAB.
+2. Përdoruesi të hapë një udhëtim dhe të shohë detajet e tij.
+3. Udhëtari të kërkojë një vend dhe të shohë statusin **“Në pritje”**.
 
 ## 5. Çfarë e lëmë për më vonë?
-Pagesat online.
-Sistemi i vlerësimeve dhe komenteve.
+
+Për versionin e parë lëmë jashtë pagesat online dhe hartën live.
+
+Gjithashtu, konfirmimin real nga shoferi dhe njoftimet automatike mund t'i shtojmë më vonë.
 
 ## 6. Si e provoj?
-Kur kërkoj një vend: Kërkesa regjistrohet dhe shfaqet si “Në pritje” te kërkesat e udhëtarit.
-Nëse nuk ka vende të lira: Shfaqet një mesazh që tregon se udhëtimi është i plotë dhe përdoruesi nuk mund të dërgojë kërkesë.
+
+**Kërkesë normale:** Arta hap listën, zgjedh një udhëtim që ka vende të lira, hap detajet dhe klikon **“Kërko vend”**. Në ekranin tjetër duhet të shfaqet **“Në pritje”**.
+
+**Kur nuk ka vende të lira:** nëse udhëtimi nuk ka vende, duhet të shfaqet **“Nuk ka vende të lira”** dhe butoni për të kërkuar vend duhet të jetë i çaktivizuar ose të mos shfaqet.
 
 ## 7. Prova me kolegun
-Kolegu u hutua te butoni për të kërkuar një vend, sepse nuk ishte mjaftueshëm i dukshëm. Në skicë e bëra butonin më të qartë dhe vendosa një përshkrim të shkurtër pranë tij.
+
+Gjatë provës kolegu u hutua sepse nuk e kuptoi menjëherë se nga lista duhej të hapte detajet e udhëtimit. Në skicë shtova një shigjetë të qartë nga lista te detajet dhe e bëra më të dukshëm veprimin **“Kërko vend”**.
 
 ## 8. Ndihma nga AI
-Përdora AI për të marrë ide për strukturën e aplikacionit dhe për veçoritë kryesore të MVP-së. Vetë kontrollova nëse këto ide përshtateshin me problemin dhe me funksionimin e aplikacionit.
+
+Përdora ndihmë nga AI për t'i organizuar përgjigjet sipas kërkesave të ushtrimit dhe për të kontrolluar rrjedhën **lista → detajet → kërkesa në pritje**. Përmbajtjen e kontrollova vetë dhe e krahasova me funksionimin e aplikacionit.

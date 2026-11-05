@@ -16,8 +16,8 @@
 ## Konfigurimi real
 
 - Neon: projekti ekzistues `rideshare-mobile`, rajoni `aws-eu-central-1`, branch-i primar `production`, databaza `neondb`.
-- Vercel: projekti `rideshare-mobile`, GitHub `AlajdinFetahi/rideshare-mobile`, production branch `main`, framework Next.js, Root Directory `aplikacioni`, function region `fra1`.
-- Production: https://rideshare-mobile-sage.vercel.app
+- Vercel: projekti `rideshare-mobile` është i lidhur me GitHub `gentemini44-Cpt/rideshare-mobile`; deployment-i Production shfaqet `Ready` në dashboard.
+- Production: https://rideshare-mobile-blush.vercel.app — kontrolli në shfletues ktheu `404 NOT_FOUND`; publikimi është i lidhur, por faqja live kërkon rregullim/verifikim.
 - `DATABASE_URL`: konfiguruar privatisht për Production dhe Development; jo për Preview.
 - `.env.local`, `.vercel`, `.next` dhe `node_modules`: të injoruara nga Git.
 
@@ -45,7 +45,7 @@
 - `npm audit` — 5 dobësi `high`, vetëm në zinxhirin e mjeteve të lint-it; rregullimi i propozuar kërkon downgrade të papajtueshëm të `eslint-config-next`.
 - Vercel deployment `dpl_FyVA9nVd6nJfvWw6WNdLGmZ8eEeg` — `Ready`, target `production`, funksionet në `fra1`.
 - `git push origin main` — commit-i final `a6347ab` u dërgua dhe nisi deployment-in production nga integrimi GitHub.
-- Issue i dorëzimit: https://github.com/arbenl/arbenl-mobile-assignments-2025/issues/433 — kontrolli automatik: **5/5**.
+- Issue i dorëzimit në repository-n e kursit: issue 433 — kontrolli automatik: **5/5**.
 
 ## Rreziqet dhe hapi i ardhshëm
 

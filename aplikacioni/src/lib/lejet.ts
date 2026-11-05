@@ -6,6 +6,14 @@ import { getSql } from "./db";
 type Profil = { id: string; emri: string; roli: "udhetar" | "shofer" };
 
 export async function profiliIm(): Promise<Profil | null> {
+  if (
+    !process.env.GITHUB_ID ||
+    !process.env.GITHUB_SECRET ||
+    !process.env.NEXTAUTH_SECRET
+  ) {
+    return null;
+  }
+
   const session = await getServerSession(authOptions);
   const id = session?.user?.id;
   if (!id || !/^\d+$/.test(id)) return null;

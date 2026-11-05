@@ -39,7 +39,7 @@ describe("Detajet", () => {
     );
 
     expect(html).toContain("Fushë Kosovë – AAB");
-    expect(html).toContain("Ora: 08:15");
+    expect(html).toContain("Ora:</strong> 08:15");
   });
 
   test("paraqet gabim të sigurt kur databaza nuk arrihet", async () => {

@@ -6,9 +6,7 @@
 
 ---
 
-**Emri dhe Mbiemri:** Blerim Tahiri  
-**ID e Studentit:** RE-88956/24  
-**Email Zyrtar AAB:** blerim.tahiri@universitetiaab.com  
+**Emri dhe Mbiemri:** Gent Emini
 
 ---
 

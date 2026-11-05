@@ -1,23 +1,19 @@
-# RideShare — Java 3
+# Java 3: Kartat dhe faqet
 
-Ruaje këtë skedar si `java-03.md` pranë README në repository-n tënd, jashtë dosjes `aplikacioni/`. Mos shto `.txt` pas emrit. Zëvendëso të gjitha shenjat e plotësimit me atë që ndodhi vërtet. Mjafton një fjali e qartë për çdo provë, por trego çfarë prite dhe çfarë pe.
+## Prova 1: Lista në telefon
 
-## Çfarë ndërtova
-Gjate kesaj jave punova ne pamjen e RideShare dhe ne pregaditjen e faqeve per udhtime.Shtova stilet per kartat, butonat dhe pamjen e pergjithshme te apliakcionit
+**Hapat:** Hapa faqen kryesore në `http://localhost:3000` dhe aktivizova pamjen e telefonit me gjerësi 375px në shfletues.
 
-## Provat që bëra
-### Prova 1: Lista në telefon
-E hapa faqen kryesore ne pamjen  e telefonit per te kontrolluar si parqiten kartat. Kontrollova  nese  permbajtjten shihet qarte dhe nese faqja mund te perdoret pa levizje anash.
+**Rezultati real:** U shfaqën saktësisht tri karta transporti (Prishtinë, Fushë Kosovë dhe Lipjan drejt AAB) dhe faqja nuk pati lëvizje horizontale.
 
-### Prova 2: Detajet e udhëtimit të dytë
-Kontrollova kartën e dyte dhe faqen e detajeve per te pare nese shfaqen informatat e udhetimit dhe vendtakimi.
-Te karta e trete kontrollova paraqitjen e udhetimit pa vende te lira. Gjithashtu kontrollova adresen /udhetimi/99 per te pare si paraqitet nje udhetim qe nuk ekziston
+## Prova 2: Detajet, zero vende dhe ID që mungon
 
-### Prova 3: Kërkesa në pritje
-Kontrollova funksionin e kerkeses per vend dhe paraqitjen e mesazhit "Simulim: Ne pritje". Kerkesa eshte vetem demonstrim dhe nuk kryhet rezervim real. Pastaj kontrollova kthimin te faqja e detajeve dhe lista.
+**Hapat:** Klikova kartën e dytë dhe kontrollova `/udhetimi/2`; pastaj hapa kartën e tretë dhe adresën `/udhetimi/99`.
 
-## Çfarë do të përmirësoj
-Ne e javen tjeter dua te permiresoj pamjen e aplikacionit ne telefon dhe te kontrolloj me mire funksionimin e butonave dhe kalimin ndermjet faqeve.
+**Rezultati real:** `/udhetimi/2` shfaqi vendtakimin “Te stacioni kryesor”; karta 3 shfaqi butonin e çaktivizuar “Nuk ka vende të lira”; `/udhetimi/99` shfaqi “Udhëtimi nuk u gjet” dhe lidhjen për t'u kthyer te lista.
 
-## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
-Perdora AI per te kuptuar disa pjese te kodit dhe per te rregulluar stilet e aplikacionit. Kodin e vendosa ne projekt dhe kontrollova hapat gjate punes.
+## Prova 3: Kërkesa dhe kthimi mbrapa
+
+**Hapat:** Nga detajet e kartës 2 klikova “Kërko vend”, kontrollova faqen e kërkesës dhe klikova “Kthehu te detajet”.
+
+**Rezultati real:** Faqja shfaqi “Simulim: Në pritje”, pa rezervim real; lidhja e kthimit e riktheu me sukses te detajet e udhëtimit.

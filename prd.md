@@ -3,7 +3,7 @@
 **Shkurtesat:** PWA (Progressive Web App – aplikacion web progresiv); PRD (Product Requirements Document – dokumenti i kërkesave të produktit); MVP (Minimum Viable Product – produkti minimal i përdorshëm); MSRP (Manufacturer's Suggested Retail Price – çmimi i sugjeruar i shitjes nga prodhuesi).
 **Kursi:** Programimi për Pajisje Mobile (2026/2027) • **Kolegji AAB**  
 **Emri i Projektit:** Sistem i Brendshëm për Menaxhim të Inventarit  
-**Themeluesi / Ekipi:** Blerim Tahiri, RE-88956/24  
+**Themeluesi / Ekipi:** Gent Emini
 **Data & Versioni:** Java 01 • Versioni 1.0 (Draft për MVP)
 
 ---

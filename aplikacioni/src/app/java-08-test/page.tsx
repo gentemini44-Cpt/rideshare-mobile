@@ -1,20 +1,17 @@
-import ZgjedhVendtakimin from "@/components/ZgjedhVendtakimin";
+import Link from "next/link";
+import MeetingPoint from "@/components/MeetingPoint";
 
 export default function Java08TestPage() {
   return (
     <main>
-      <p className="eyebrow">Simulim lokal · të dhëna fiktive</p>
-      <h1>RideShare</h1>
-      <p>Arta · udhëtimi i Dritonit · ID 2</p>
-      <div className="details">
-        <p>
-          <strong>Udhëtimi:</strong> Ferizaj → AAB
-        </p>
-        <p>
-          <strong>Nisja:</strong> 08:15
-        </p>
-      </div>
-      <ZgjedhVendtakimin />
+      <Link href="/">← Kthehu te udhëtimet</Link>
+      <p className="eyebrow">Java 8 · Faqja e provës</p>
+      <h1>Vendtakimi yt</h1>
+      <p>
+        Provë me të dhëna fiktive. Leja e vendndodhjes kërkohet vetëm kur e
+        shtyp butonin.
+      </p>
+      <MeetingPoint />
     </main>
   );
 }

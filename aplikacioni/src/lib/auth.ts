@@ -2,6 +2,14 @@ import "server-only";
 import type { DefaultSession, NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
+export function authIsConfigured() {
+  return Boolean(
+    process.env.NEXTAUTH_SECRET &&
+      process.env.GITHUB_ID &&
+      process.env.GITHUB_SECRET,
+  );
+}
+
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [

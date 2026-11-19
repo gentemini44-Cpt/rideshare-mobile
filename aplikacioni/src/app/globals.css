@@ -96,53 +96,66 @@ h2 {
   color: #e4eaf4;
 }
 
-.location-picker {
-  margin: 28px 0;
+.meeting-point {
+  margin-top: 24px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
   padding: 18px;
 }
 
-.location-picker h2 {
+.meeting-point h2 {
   margin-top: 0;
 }
 
-.location-picker p {
+.meeting-point label,
+.confirmed-meeting-label {
+  display: block;
+  margin: 12px 0 6px;
   color: var(--muted);
 }
 
-.location-label {
-  display: grid;
-  gap: 8px;
-  font-weight: 600;
-}
-
-.location-label input {
+.meeting-input {
   width: 100%;
-  min-height: 44px;
+  min-height: 48px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--background);
-  padding: 8px 12px;
+  padding: 10px 12px;
   color: var(--text);
   font: inherit;
 }
 
-.location-secondary-action {
-  margin-left: 8px;
-  background: #263650;
+.meeting-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  padding: 10px 14px;
+  color: white;
+  font: inherit;
 }
 
-.confirmed-meeting-place {
-  border-left: 3px solid #89ddff;
-  padding-left: 12px;
+.meeting-button.secondary {
+  border: 1px solid var(--border);
+  background: transparent;
 }
 
-@media (max-width: 520px) {
-  .location-secondary-action {
-    margin-left: 0;
-  }
+.meeting-button:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.meeting-error {
+  color: #ff9a9a;
+}
+
+.location-status,
+.location-accuracy,
+.meeting-location-note {
+  color: var(--muted);
 }
 
 @media (max-width: 420px) {

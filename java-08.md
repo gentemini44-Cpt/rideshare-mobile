@@ -1,64 +1,51 @@
 # RideShare — Java 8
 
-## Përgatitja
-
-Hapa projektin ekzistues RideShare dhe shqyrtova punën e javës së kaluar në `java-07.md` dhe rrjedhën e detajeve të udhëtimit. Përgatita faqen lokale `/java-08-test` me të dhëna fiktive, pa hyrje apo Neon, si dhe `mobile-week08.json`. Për provat përdora ID 2 dhe vetëm vendtakime fiktive si “Biblioteka”, “Parkingu” dhe “Hyrja B”; nuk përdora apo regjistrova adresën ose koordinatat e mia. Provat nuk ndryshuan databazën.
-
 ## Çfarë ndërtova
-
-Te faqja e detajeve pika e nisjes shfaqet qartë, ndërsa vendtakimi i shoferit shfaqet veçmas. Shtova një zgjedhje lokale të vendtakimit. Përdoruesi mund ta shkruajë vendin, ta ndryshojë tekstin pa humbur zgjedhjen e konfirmuar dhe ta përditësojë vetëm me butonin “Konfirmo”.
-
-Butoni “Përdor vendndodhjen time” kërkon lejen vetëm pas klikimit. Gjatë kërkesës shfaqet gjendja e pritjes dhe përdoret timeout 10 sekonda. Suksesi shfaq vetëm saktësinë, jo koordinatat; refuzimi, pozicioni i padisponueshëm, timeout-i dhe mungesa e mbështetjes e lënë të përdorshme fushën manuale. Përzgjedhja mbetet në gjendjen e komponentit të klientit: nuk dërgohet në server ose në Neon.
+Shtova zgjedhjen lokale të vendtakimit te detajet e udhëtimit. Përdoruesi mund të shkruajë dhe konfirmojë një vendtakim ose të kërkojë pozicionin nga telefoni. Pozicioni nuk e cakton emrin e vendtakimit dhe nuk dërgohet te shoferi.
 
 ## Provat që bëra
+### Prova 1: Leja nuk kërkohet sapo hapet faqja.
+- **Hapat:** Hapa `/java-08-test` dhe vëreva gjendjen para se të klikoja vendndodhjen.
+- **Pritshmëria:** Faqja hapet pa kërkuar leje; vendndodhja lexohet vetëm pas klikimit.
+- **Vëzhgimi:** Faqja u hap në gjendjen `idle`, pa kërkuar leje. Me një përgjigje të simuluar në shfletues pas klikimit, u shfaq “Pozicioni u mor” dhe `37 m`. Nuk u testua pajisje fizike.
 
-### Prova 1: Leja nuk kërkohet sapo hapet faqja
+### Prova 2: Refuzimi i lejes nuk e bllokon përdoruesin.
+- **Hapat:** Me API-n e vendndodhjes të simuluar në shfletues, ktheva gabimin me kodin 1, pastaj shkrova dhe konfirmova `Parkingu`.
+- **Pritshmëria:** Shfaqet mesazhi i refuzimit, pritja mbaron dhe vendtakimi manual mund të konfirmohet.
+- **Vëzhgimi:** U shfaq gjendja `denied`; butoni i vendndodhjes u bë përsëri i përdorshëm dhe `Parkingu` u konfirmua. Ky ishte simulim i kodit të gabimit, jo refuzim i lejes reale të pajisjes.
 
-**Hapat:** Hapa `/udhetimi/2` lokalisht në Chrome headless. Para klikimit lexova gjendjen e lejes `geolocation` dhe numrin e thirrjeve të `getCurrentPosition`. Pastaj lejova vendndodhjen nga DevTools, vendosa një pozicion fiktiv dhe shtypa “Përdor vendndodhjen time”.
+### Prova 3: Skadimi i pritjes nuk e bllokon përdoruesin.
+- **Hapat:** Simulova gabimin me kodin 3, pastaj shkrova dhe konfirmova `Stacioni`.
+- **Pritshmëria:** Shfaqet gjendja `timeout`, pritja mbaron dhe vendtakimi manual mund të konfirmohet.
+- **Vëzhgimi:** U shfaq gjendja `timeout`; butoni i vendndodhjes u bë përsëri i përdorshëm dhe `Stacioni` u konfirmua. Ky ishte simulim i kodit të gabimit, jo pritje reale dhjetësekondëshe.
 
-**Pritja:** Në hapje leja mbetet `prompt` dhe nuk thirret API-ja. Pas klikimit shfaqet pritja; pas suksesit shfaqet saktësia, pa koordinata.
-
-**Rezultati real:** Në hapje leja ishte `prompt` dhe numri i thirrjeve ishte 0. Pas klikimit pati një thirrje me timeout 10000 ms; faqja shfaqi përmbledhjen me saktësinë e pozicionit fiktiv. Pika e nisjes së udhëtimit shfaqet te detajet. Gjerësia dhe gjatësia e pozicionit të DevTools nuk u shfaqën në faqe.
-
-### Prova 2: Refuzimi i lejes nuk e bllokon përdoruesin
-
-**Hapat:** Vendosa lejen `geolocation` në `denied` në DevTools dhe shtypa butonin e vendndodhjes. Pastaj shkrova “Hyrja pranë parkingut” dhe shtypa “Konfirmo”. Simulova veçmas gabimin e pozicionit të padisponueshëm, timeout-in dhe mungesën e `navigator.geolocation`. Në faqen `/java-08-test` kontrollova gjithashtu se teksti me vetëm hapësira jep gabim.
-
-**Pritja:** Pas refuzimit, pritja mbaron, shfaqet mesazhi përkatës dhe vendtakimi manual mund të konfirmohet. Edhe tri rastet e tjera japin mesazh dhe nuk e lënë ekranin në pritje.
-
-**Rezultati real:** Refuzimi shfaqi udhëzimin për vazhdim manual; “Hyrja pranë parkingut” u konfirmua. Pozicioni i padisponueshëm, timeout-i dhe mungesa e mbështetjes u provuan me kthime të simuluara në shfletues dhe të tria përfunduan me fushën manuale të përdorshme. Teksti me vetëm hapësira shfaqi gabim dhe nuk e ndryshoi vendtakimin e konfirmuar.
-
-### Prova 3: Dëshmitë në GitHub nuk tregojnë adresën time reale
-
-**Hapat:** Kontrollova skedarët lokalë që do të ngarkohen dhe kërkesat e shfletuesit gjatë konfirmimit. Përdora vetëm emra vendesh fiktivë: “Biblioteka”, “Parkingu”, “Hyrja B” dhe “Hyrja pranë parkingut”. Ndryshova tekstin nga “Biblioteka” në “Hyrja B” pa konfirmim dhe kontrollova se zgjedhja mbeti “Biblioteka”; pastaj e konfirmova.
-
-**Pritja:** Përzgjedhja e konfirmuar ndryshon vetëm pas klikimit; konfirmimi nuk dërgon vendtakimin ose koordinatat te serveri. Raporti përmban vetëm të dhëna prove fiktive.
-
-**Rezultati real:** Teksti i konfirmuar nuk ndryshoi derisa shtypa “Konfirmo”. Pas klikimit nuk pati kërkesë POST ose kërkesë API nga ky veprim. Faqja nuk shfaqi koordinatat fiktive të DevTools. Skedarët e Java 8 nuk përmbajnë adresë ose koordinata personale.
+### Prova 4: Dëshmitë në GitHub nuk tregojnë adresën time reale.
+- **Hapat:** Kontrollova skedarët e Javës 8 të krijuar dhe ndryshuar për koordinata, adresa reale dhe sekrete.
+- **Pritshmëria:** Nuk publikohen vendndodhje ose të dhëna sekrete.
+- **Vëzhgimi:** Komponenti aktiv nuk ruan apo shfaq koordinatat; shfaq vetëm saktësinë në metra. Faqja `/java-08-test` përdor tekst fiktiv dhe nuk lidhet me Neon. Nuk u provua pajisje fizike.
 
 ## Ku gjendet puna
+- `aplikacioni/src/components/MeetingPoint.tsx` — komponenti aktiv i vendtakimit dhe vendndodhjes.
+- `aplikacioni/src/app/udhetimi/[id]/page.tsx` — integrimi në detajet reale të udhëtimit.
+- `aplikacioni/src/app/java-08-test/page.tsx` — faqe prove pa Neon ose hyrje.
+- `aplikacioni/src/components/MeetingPoint.test.tsx` — test për gjendjen fillestare pa kërkesë automatike për GPS.
+- `aplikacioni/src/app/globals.css` — stilet mobile të komponentit.
+- `mobile-week08.json` — konfigurimi i faqes së provës për testin automatik të dorëzimit.
+- Demonstrimi lokal: `/java-08-test`.
 
-- Fusha manuale dhe vendndodhja: `aplikacioni/src/components/ZgjedhVendtakimin.tsx`.
-- Integrimi në detaje: `aplikacioni/src/app/udhetimi/[id]/page.tsx`.
-- Faqja e testimit lokal: `aplikacioni/src/app/java-08-test/page.tsx`.
-- Konfigurimi i testit: `mobile-week08.json`; `package-lock.json` është pranë `package.json` në `aplikacioni/`.
-- Stilet: `aplikacioni/src/app/globals.css`.
-- Raporti: `java-08.md` pranë README-së.
-- Repository: [gentemini44-Cpt/rideshare-mobile](https://github.com/gentemini44-Cpt/rideshare-mobile).
-- Demonstrim publik i aplikacionit: ende nuk kam publikuar një lidhje live.
+Build-i, lint-i dhe 15 testet automatike të aplikacionit kaluan. Në shfletues provova veçmas refuzimin dhe skadimin me kode të simuluara. Këto nuk zëvendësojnë provën e lejeve GPS në pajisje fizike. Publikimi në Vercel ende nuk është konfirmuar.
 
 ## Çfarë mbetet për përmirësim
-
-Gjendja e vendtakimit mbahet vetëm në `useState`; pas rifreskimit humbet. Provat e lejes dhe pozicionit u bënë lokalisht në Chrome headless me leje dhe pozicion të kontrolluar nga DevTools; gabimet e tjera u simuluan në shfletues. Prova me një koleg në pajisje reale mbetet për t’u bërë. Dorëzimi në formular dhe leximi i dy përgjigjeve automatike në GitHub mbeten për t’u bërë.
-
-## Prova me një hyrje të re
-
-- Hyrja që provova: Në faqen lokale `/java-08-test`, konfirmova “Biblioteka”, shkrova “Parkingu” pa e konfirmuar, pastaj vendosa vetëm hapësira dhe shtypa “Konfirmo”. E provova vetë në Chrome headless, jo me koleg.
-- Parashikimi im para klikimit: `trim()` jep tekst bosh; shfaqet gabim dhe vendtakimi i mëparshëm “Biblioteka” mbetet i konfirmuar.
-- Çfarë pashë realisht: U shfaq gabimi për plotësimin e vendtakimit dhe zgjedhja e konfirmuar mbeti “Biblioteka”.
-- Skedari dhe funksioni që e shpjegojnë: `aplikacioni/src/components/ZgjedhVendtakimin.tsx`, funksioni `konfirmoVendtakimin`.
-- Çfarë kuptova ose korrigjova: Teksti në fushë dhe vendtakimi i konfirmuar janë dy gjendje të ndara; vlera bosh kthehet pa e zëvendësuar zgjedhjen. Prova me koleg duhet përsëritur në klasë.
+Zgjedhja ruhet vetëm në gjendjen lokale të faqes dhe nuk i dërgohet shoferit; humbet pas rifreskimit. GPS-i real kërkon leje dhe kontekst të sigurt (localhost ose HTTPS). Duhet provuar pranimi dhe refuzimi i lejes në shfletues.
 
 ## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
+Përdora Copilot për të lexuar kërkesat e javës 8 dhe për të zbatuar komponentin e ripërdorshëm. Verifikova kodin me lint/build; sjelljen e GPS-it real dhe lejet e pajisjes duhet t’i provoj vetë në shfletues.
 
-AI ndihmoi në leximin e kërkesave, zbatimin e përzgjedhjes manuale dhe të vendndodhjes, si dhe në përgatitjen e provave. Verifikova vetë ndërtimin e projektit dhe rrjedhat në shfletues; pozicioni i testimit ishte fiktiv dhe databaza nuk u ndryshua.
+## Prova me një hyrje të re
+- Hyrja që provova: Shkrova `Biblioteka`, e konfirmova, pastaj ndryshova fushën në `Parkingu` pa e konfirmuar.
+- Parashikimi im para klikimit: Vendtakimi i konfirmuar do të mbetet `Biblioteka` derisa të konfirmohet vlera e re.
+- Çfarë pashë realisht: Vendtakimi i konfirmuar mbeti `Biblioteka`. Gjithashtu provova tekstin vetëm me hapësira; u shfaq gabimi dhe zgjedhja e mëparshme mbeti.
+- Skedari dhe funksioni që e shpjegojnë: `components/MeetingPoint.tsx`, `confirmMeeting`
+- Çfarë kuptova ose korrigjova: Teksti në fushë dhe vendtakimi i konfirmuar janë vlera të veçanta; vetëm butoni i konfirmimit e ndryshon zgjedhjen.
+
+Këtë pjesë e shpjegoj në klasë. Kontrolli automatik nuk verifikon vërtetësinë e provës.

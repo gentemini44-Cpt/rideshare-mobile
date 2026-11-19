@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "RideShare - Gent Emini",
+    name: "RideShare AAB",
     short_name: "RideShare",
-    description: "Udhëtime drejt AAB; punuar nga Gent Emini.",
+    description: "Udhëtime drejt AAB; listë publike për lexim offline.",
     start_url: "/",
     scope: "/",
     display: "standalone",

@@ -2,62 +2,61 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import type { Udhetim } from "@/lib/udhetimet";
 
-const { lexoUdhetimetMock, getServerSessionMock } = vi.hoisted(() => ({
-  lexoUdhetimetMock: vi.fn(),
-  getServerSessionMock: vi.fn(),
+const { gjejUdhetiminMock } = vi.hoisted(() => ({
+  gjejUdhetiminMock: vi.fn(),
 }));
 
 vi.mock("@/lib/udhetimet", () => ({
-  lexoUdhetimet: lexoUdhetimetMock,
+  gjejUdhetimin: gjejUdhetiminMock,
 }));
-vi.mock("next-auth", () => ({
-  getServerSession: getServerSessionMock,
+vi.mock("next/navigation", () => ({
+  notFound: () => {
+    throw new Error("NEXT_NOT_FOUND");
+  },
 }));
 
-import Home from "./page";
+import Detajet from "./udhetimi/[id]/page";
 
-const udhetimet: Udhetim[] = [{
+const udhetimi: Udhetim = {
   id: "2",
   nisja: "Fushë Kosovë",
   destinacioni: "AAB",
   ora: "08:15",
   vendtakimi: "Te stacioni kryesor",
   vende: 1,
-}];
+};
 
-describe("Lista e udhëtimeve", () => {
+describe("Detajet", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    getServerSessionMock.mockResolvedValue(null);
   });
 
-  test("paraqet udhëtimet nga databaza", async () => {
-    lexoUdhetimetMock.mockResolvedValue(udhetimet);
+  test("pret dhe paraqet udhëtimin e gjetur", async () => {
+    gjejUdhetiminMock.mockResolvedValue(udhetimi);
 
     const html = renderToStaticMarkup(
-      await Home(),
+      await Detajet({ params: Promise.resolve({ id: "2" }) }),
     );
 
     expect(html).toContain("Fushë Kosovë – AAB");
-    expect(html).toContain("08:15");
+    expect(html).toContain("<strong>Ora:</strong> 08:15");
   });
 
-  test("paraqet listën bosh", async () => {
-    lexoUdhetimetMock.mockResolvedValue([]);
+  test("paraqet gabim të sigurt kur databaza nuk arrihet", async () => {
+    gjejUdhetiminMock.mockRejectedValue(new Error("connection failed"));
 
     const html = renderToStaticMarkup(
-      await Home(),
+      await Detajet({ params: Promise.resolve({ id: "2" }) }),
     );
 
-    expect(html).toContain("Nuk ka udhetime per momentin.");
-    expect(html).toContain("Rifresko listen");
+    expect(html).toContain("Nuk u lidhëm me databazën. Provo përsëri.");
   });
 
-  test("paraqet mesazh rikuperimi kur databaza nuk arrihet", async () => {
-    lexoUdhetimetMock.mockRejectedValue(new Error("connection failed"));
+  test("përdor faqen not-found kur udhëtimi mungon", async () => {
+    gjejUdhetiminMock.mockResolvedValue(undefined);
 
-    const html = renderToStaticMarkup(await Home());
-
-    expect(html).toContain("Nuk u lidhem me databazen. Provo perseri.");
+    await expect(
+      Detajet({ params: Promise.resolve({ id: "99" }) }),
+    ).rejects.toThrow("NEXT_NOT_FOUND");
   });
 });
